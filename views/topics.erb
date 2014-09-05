@@ -6,7 +6,7 @@
     <% @keys.each do |key| %>
     <% parsed = JSON.parse($redis.get(key)) %>
 
-    <h2> <%= parsed["topic"] %> </h2>
+    <h2> <a href="/topics/<%=parsed["topic"]%>"> <%= parsed["topic"] %></a> </h2>
     <h3> <%= parsed["message"] %> </h3>
     <p> posted by: <%= parsed["username"] %> </p>
     <% end %>
