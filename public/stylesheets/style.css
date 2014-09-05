@@ -1,0 +1,15 @@
+h1 {
+  color: blue;
+  font-size: 3em;
+  text-align: center;
+}
+
+h2 {
+  color: green;
+  font-size: 1.5em;
+}
+
+h3 {
+  color: red;
+  font-size: 1.2em;
+}
