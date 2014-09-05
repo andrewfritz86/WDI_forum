@@ -1,12 +1,16 @@
 
 <a href="topics/new"> post a new topic </a>
+  <% if @desired_topic == nil %>
+  <% @keys.each do |key| %>
+  <% parsed = JSON.parse($redis.get(key)) %>
 
-<% @keys.each do |key| %>
-<% parsed = JSON.parse($redis.get(key)) %>
-
-<h2> <%= parsed["topic"] %> </h2>
-<h3> posted by: <%= parsed["username"] %> </h3>
-<p> <%= parsed["message"] %> </p>
+  <h2> <%= parsed["topic"] %> </h2>
+  <h3> posted by: <%= parsed["username"] %> </h3>
+  <p> <%= parsed["message"] %> </p>
+  <% end %>
+<% else %>
+</br>
+sup
 
 
 <% end %>

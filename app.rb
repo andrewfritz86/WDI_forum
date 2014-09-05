@@ -39,6 +39,12 @@ class App < Sinatra::Base
     render(:erb, :topics)
   end
 
+  get('/topics/:topic') do
+    @desired_topic = params["topic"]
+    all_topics = $redis.keys
+    render(:erb, :topics)
+  end
+
   get('/topics/new') do
     render(:erb, :new_topic)
   end
@@ -46,7 +52,8 @@ class App < Sinatra::Base
   post('/topics') do
     #there should be logic here to make sure that all fields are cointain
     #something, ie parameters aren't nil
-    topic = params["topic"]
+    topic = params["topic"]#eventually this will gsub to a SLUG
+    title = params["topic"]
     message = params["message"]
     username = params["username"]
     hash = {
@@ -56,6 +63,7 @@ class App < Sinatra::Base
           }
     # binding.pry
     hash = hash.to_json
+    $redis.set(topic,hash)
     # binding.pry
     redirect to('/topics')
   end
