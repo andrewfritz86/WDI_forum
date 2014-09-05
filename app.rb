@@ -34,6 +34,10 @@ class App < Sinatra::Base
     redirect to ('/topics')
   end
 
+  get('/topics/new') do
+    render(:erb, :new_topic)
+  end
+
   get('/topics') do
     @keys = $redis.keys
     render(:erb, :topics)
@@ -42,12 +46,13 @@ class App < Sinatra::Base
   get('/topics/:topic') do
     @desired_topic = params["topic"]
     @all_topics = $redis.keys
+    # binding.pry
     render(:erb, :topics)
   end
 
-  get('/topics/new') do
-    render(:erb, :new_topic)
-  end
+  # get('/topics/new') do
+  #   render(:erb, :new_topic)
+  # end
 
   post('/topics') do
     #there should be logic here to make sure that all fields are cointain

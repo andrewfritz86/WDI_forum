@@ -1,24 +1,27 @@
 
-<a href="topics/new"> post a new topic </a>
-  <% if @desired_topic == nil %>
-  <% @keys.each do |key| %>
-  <% parsed = JSON.parse($redis.get(key)) %>
+<a href="/topics/new"> post a new topic </a>
 
-  <h2> <%= parsed["topic"] %> </h2>
-  <h3> posted by: <%= parsed["username"] %> </h3>
-  <p> <%= parsed["message"] %> </p>
-  <% end %>
-<% else %>
-</br>
-  <% @all_topics.each do |topic| %>
-    <%if topic == @desired_topic %>
-    <% parsed = JSON.parse($redis.get(topic)) %>
+
+<%if @desired_topic == nil%>
+    <% @keys.each do |key| %>
+    <% parsed = JSON.parse($redis.get(key)) %>
+
     <h2> <%= parsed["topic"] %> </h2>
     <h3> <%= parsed["message"] %> </h3>
+    <p> posted by: <%= parsed["username"] %> </p>
     <% end %>
-
-
+<%else%>
+</br>
+  <%if @all_topics.include?(@desired_topic)%>
+      <%@all_topics.each do |topic| %>
+          <%if topic == @desired_topic %>
+          <% parsed = JSON.parse($redis.get(topic)) %>
+          <h2> <%= parsed["topic"] %> </h2>
+          <h3> <%= parsed["message"] %> </h3>
+          <% end %>
+        <% end %>
+      <% else %>
+    <h3> sorry! That hasn't been posted yet! Why not <a href ="/topics/new"> post </a> it? </h3>
   <%end%>
-
 
 <% end %>
