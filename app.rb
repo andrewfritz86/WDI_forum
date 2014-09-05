@@ -41,7 +41,7 @@ class App < Sinatra::Base
 
   get('/topics/:topic') do
     @desired_topic = params["topic"]
-    all_topics = $redis.keys
+    @all_topics = $redis.keys
     render(:erb, :topics)
   end
 

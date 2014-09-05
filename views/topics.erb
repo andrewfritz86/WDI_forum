@@ -10,7 +10,15 @@
   <% end %>
 <% else %>
 </br>
-sup
+  <% @all_topics.each do |topic| %>
+    <%if topic == @desired_topic %>
+    <% parsed = JSON.parse($redis.get(topic)) %>
+    <h2> <%= parsed["topic"] %> </h2>
+    <h3> <%= parsed["message"] %> </h3>
+    <% end %>
+
+
+  <%end%>
 
 
 <% end %>
