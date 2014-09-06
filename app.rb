@@ -96,7 +96,7 @@ class App < Sinatra::Base
   ########deletes###
     delete('/topics') do
     delete_topic = params["topic"]
-    binding.pry
+    # binding.pry
     $redis.keys.each do |topic|
       if topic == delete_topic
         $redis.del(topic)

@@ -1,15 +1,75 @@
 h1 {
-  color: blue;
-  font-size: 3em;
+
+  font-size: 4.0em;
   text-align: center;
 }
 
 h2 {
   color: green;
-  font-size: 1.5em;
+  font-size: 2.0em;
 }
 
 h3 {
-  color: red;
-  font-size: 0.75em;
+  color: #E88DFF;
+  font-size: 1em;
 }
+
+body {
+  background-color:   #FFBF7E;
+}
+
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color:green;
+  text-decoration: none;
+}
+
+footer {
+  color:white;
+  text-align: center;
+  padding: 25px;
+}
+
+
+
+.signature {
+  font-size: 0.7em;
+  font-weight: bolder;
+}
+
+.full_post {
+    width: 700px;
+    padding: 25px;
+    border: 10px solid lightblue;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: lightgreen;
+    font-family: Helvetica;
+}
+
+.new_topic_link {
+  font-size: 1.25em;
+  text-align :center;
+  margin: 25px;
+}
+
+input[type=submit] {
+    border-radius: 5px;
+    border: 0;
+    width: 100px;
+    height:25px;
+    font-family: Helvetica;
+    background-color: lightblue;
+    color: white;
+
+    /* W3C */
+    }

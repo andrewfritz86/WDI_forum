@@ -1,23 +1,26 @@
 
-<a href="/topics/new"> post a new topic </a>
+<div class="new_topic_link" > <a href="/topics/new"> post a new topic </a> </div>
 
 
 <%if @desired_topic == nil%>
     <% @keys.each do |key| %>
     <% parsed = JSON.parse($redis.get(key)) %>
-
-    <h2> <a href="/topics/<%=parsed["topic"]%>"> <%= parsed["title"] %></a> </h2>
-    <h3> <%= parsed["message"] %> </h3>
-    <p> posted by: <%= parsed["username"] %> </p>
+    <article class="full_post">
+      <h2> <a href="/topics/<%=parsed["topic"]%>"> <%= parsed["title"] %></a> </h2>
+      <h3> <%= parsed["message"] %> </h3>
+      <p class="signature"> posted by: <%= parsed["username"] %> </p>
+    </article>
+  </br>
     <% end %>
 <%else%>
 </br>
       <%@all_topics.each do |topic| %>
           <% parsed = JSON.parse($redis.get(topic)) %>
           <% if @desired_topic == parsed["topic"] %>
-          <h2> <%= parsed["title"] %> </h2>
-          <h3> <%= parsed["message"] %> </h3>
-          <p> posted by: <%= parsed["username"] %> </p>
+          <article class="full_post">
+            <h2> <%= parsed["title"] %> </h2>
+            <h3> <%= parsed["message"] %> </h3>
+            <p> posted by: <%= parsed["username"] %> </p>
           <% @selected_topic = topic %>
           <!-- can put an else here to show an error message? -->
           <% end %>
@@ -28,4 +31,5 @@
           <input type ="submit"  name="delete" value="delete topic"/>
         </form>
         <a href ="/topics"> back to all topics </a>
+      </article>
 <% end %>
