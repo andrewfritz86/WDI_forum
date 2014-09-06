@@ -87,3 +87,22 @@ redis.set("topic 3", topic3)
         [2] "thanks"
     ]
 }
+
+
+
+
+all_topics.each do |topic|
+          <%if topic == @desired_topic
+          <% parsed = JSON.parse($redis.get(topic))
+          <h2> <%= parsed["title"] %> </h2>
+          <h3> <%= parsed["message"] %> </h3>
+          <% end %>
+        <% end %>
+
+
+        $redis.keys.each do |topic|
+          parsed = JSON.parse(redis.get(topic))
+          if params["topic"] == parsed["topic"]
+            parsed["title"]
+          end
+        end

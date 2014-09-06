@@ -26,9 +26,24 @@ class App < Sinatra::Base
     logger.info "Response Headers: #{response.headers}"
   end
 
+
+
+  #####methods ########
+
+
+  def cleanup(string)
+    string = string.delete("?").delete("'").delete(",")
+    string.gsub!(" ","-")
+    string
+  end
+
   ########################
   # Routes
   ########################
+
+  ############
+  ##gets
+  ###########
 
   get('/') do
     redirect to ('/topics')
@@ -43,17 +58,6 @@ class App < Sinatra::Base
     render(:erb, :topics)
   end
 
-  delete(/topics/) do
-    delete_topic = params["topic"]
-    $redis.keys.each do |topic|
-      if topic == delete_topic
-        $redis.del(topic)
-      end
-    end
-    binding.pry
-    redirect to('/topics')
-  end
-
   get('/topics/:topic') do
     @desired_topic = params["topic"]
     @all_topics = $redis.keys
@@ -61,27 +65,43 @@ class App < Sinatra::Base
     render(:erb, :topics)
   end
 
-  # get('/topics/new') do
-  #   render(:erb, :new_topic)
-  # end
+
+################
+# ###posts
+################
+
 
   post('/topics') do
     #there should be logic here to make sure that all fields are cointain
     #something, ie parameters aren't nil
-    topic = params["topic"]#eventually this will gsub to a SLUG
+    topic = cleanup(params["topic"])#eventually this will gsub to a SLUG
+
     title = params["topic"]
     message = params["message"]
     username = params["username"]
+
     hash = {
         "topic" => topic,
         "username" => username,
-        "message" => message
+        "message" => message,
+        "title" => title
           }
-    # binding.pry
     hash = hash.to_json
-    $redis.set(topic,hash)
+    $redis.set(title,hash)
     # binding.pry
     redirect to('/topics')
   end
+
+
+  ########deletes###
+    delete('/topics') do
+    delete_topic = params["topic"]
+    $redis.keys.each do |topic|
+      if topic == delete_topic
+        $redis.del(topic)
+      end
+    end
+    redirect to('/topics')
+    end
 
 end

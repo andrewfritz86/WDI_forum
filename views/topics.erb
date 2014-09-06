@@ -6,18 +6,18 @@
     <% @keys.each do |key| %>
     <% parsed = JSON.parse($redis.get(key)) %>
 
-    <h2> <a href="/topics/<%=parsed["topic"]%>"> <%= parsed["topic"] %></a> </h2>
+    <h2> <a href="/topics/<%=parsed["topic"]%>"> <%= parsed["title"] %></a> </h2>
     <h3> <%= parsed["message"] %> </h3>
     <p> posted by: <%= parsed["username"] %> </p>
     <% end %>
 <%else%>
 </br>
-  <%if @all_topics.include?(@desired_topic)%>
       <%@all_topics.each do |topic| %>
-          <%if topic == @desired_topic %>
           <% parsed = JSON.parse($redis.get(topic)) %>
-          <h2> <%= parsed["topic"] %> </h2>
+          <% if @desired_topic == parsed["topic"] %>
+          <h2> <%= parsed["title"] %> </h2>
           <h3> <%= parsed["message"] %> </h3>
+          <p> posted by: <%= parsed["username"] %> </p>
           <% end %>
         <% end %>
         <form method="POST" action="/topics">
@@ -26,8 +26,4 @@
           <input type ="submit"  name="delete" value="delete topic"/>
         </form>
         <a href ="/topics"> back to all topics </a>
-      <% else %>
-    <h3> sorry! That hasn't been posted yet! Why not <a href ="/topics/new"> post </a> it? </h3>
-  <%end%>
-
 <% end %>
