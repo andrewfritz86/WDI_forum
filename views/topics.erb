@@ -23,7 +23,7 @@
         <form method="POST" action="/topics">
           <input type="hidden" name="_method" value="DELETE" />
           <input type="hidden" name="topic" value ="<%=@desired_topic%>"/>
-          <input type ="submit" />
+          <input type ="submit"  name="delete" value="delete topic"/>
         </form>
         <a href ="/topics"> back to all topics </a>
       <% else %>
