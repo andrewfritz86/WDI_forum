@@ -29,7 +29,8 @@ a:visited {
 }
 
 a:hover {
-  color:green;
+  color:#FFFFA9
+;
   text-decoration: none;
 }
 
@@ -60,6 +61,15 @@ footer {
   font-size: 1.25em;
   text-align :center;
   margin: 25px;
+}
+
+.new_topic {
+  padding: 20px;
+  border: 10px solid lightblue;
+  background-color: lightgreen;
+  border-radius: 10px;
+  width: 300px;
+  margin: 0 auto;
 }
 
 input[type=submit] {
