@@ -20,6 +20,12 @@
           <h3> <%= parsed["message"] %> </h3>
           <% end %>
         <% end %>
+        <form method="POST" action="/topics">
+          <input type="hidden" name="_method" value="DELETE" />
+          <input type="hidden" name="topic" value ="<%=@desired_topic%>"/>
+          <input type ="submit" />
+        </form>
+        <a href ="/topics"> back to all topics </a>
       <% else %>
     <h3> sorry! That hasn't been posted yet! Why not <a href ="/topics/new"> post </a> it? </h3>
   <%end%>

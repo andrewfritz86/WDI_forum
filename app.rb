@@ -43,6 +43,17 @@ class App < Sinatra::Base
     render(:erb, :topics)
   end
 
+  delete(/topics/) do
+    delete_topic = params["topic"]
+    $redis.keys.each do |topic|
+      if topic == delete_topic
+        $redis.del(topic)
+      end
+    end
+    binding.pry
+    redirect to('/topics')
+  end
+
   get('/topics/:topic') do
     @desired_topic = params["topic"]
     @all_topics = $redis.keys
