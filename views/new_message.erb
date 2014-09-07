@@ -1,4 +1,8 @@
-        <form method="POST" action="/topics/<%= @desired_topic %>">
+        <section class="new_topic">
+        <form method="POST" action="/topics/<%= @url_topic %>/new_message">
+        <input type="hidden" name="_method" value="POST" />
           <input type="text" name="new_message"/>
+          <input type="hidden" name="title" value ="<%= @title%>"/>
           <input type ="submit"  name="add" value="add reply"/>
         </form>
+      </section>

@@ -54,8 +54,9 @@ class App < Sinatra::Base
   end
 
   get('/topics/:topic/new_message') do
-
-    "plz god"
+    @title = params["correct_topic"]
+    @url_topic = params["topic"]
+    render(:erb, :new_message)
   end
 
   get('/topics') do
@@ -98,6 +99,21 @@ class App < Sinatra::Base
     $redis.set(title,hash)
     # binding.pry
     redirect to('/topics')
+  end
+
+
+  post('/topics/:topic/new_message') do
+    @new_message = params["new_message"]
+    @topic_needed = params["title"]
+    new_hash = {"message" => @new_message,
+                "username" => "default"}
+    parsed = JSON.parse($redis.get(@topic_needed))
+    parsed["messages"].push(new_hash)
+    json = parsed.to_json
+    $redis.del(@topic_needed)
+    $redis.set(@topic_needed,json)
+    redirect to('/topics')
+
   end
 
 
