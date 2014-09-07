@@ -106,3 +106,41 @@ all_topics.each do |topic|
             parsed["title"]
           end
         end
+
+
+
+
+#####sample structure with multiple messages#####
+
+
+
+{"topic" => "example topic",
+  "title" => "example topic",
+  "username" => "username",
+  "messages" => [
+              { "message" => "message contents",
+                "id" => "message1",
+                "vote-count" => 0},
+              {"message" => "message contetnts 2"},
+              {"message" => "message contents 3"},
+            ]
+          }
+
+
+
+
+{"topic" => "I don't get redis",
+  "title" => "I don't get redis",
+  "username" => "darth vader",
+  "messages" => [
+              { "message" => "it makes no sense!",
+                "id" => "message1",
+                "username" => "ade",
+                "vote-count" => 0},
+              {"message" => "what's the issue?",
+                "username" => "rob"},
+              {"message" => "I can help!",
+                "username" => "jacki"},
+            ]
+          }
+

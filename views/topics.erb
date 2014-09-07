@@ -7,8 +7,10 @@
     <% parsed = JSON.parse($redis.get(key)) %>
     <article class="full_post">
       <h2> <a href="/topics/<%=parsed["topic"]%>"> <%= parsed["title"] %></a> </h2>
-      <h3> <%= parsed["message"] %> </h3>
-      <p class="signature"> posted by: <%= parsed["username"] %> </p>
+      <% parsed["messages"].each do |message| %>
+      <h3> <%= message["message"] %> </h3>
+      <p class="signature"> posted by: <%= message["username"] %>
+      <% end %>
     </article>
   </br>
     <% end %>
