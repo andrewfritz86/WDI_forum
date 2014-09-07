@@ -53,6 +53,11 @@ class App < Sinatra::Base
     render(:erb, :new_topic)
   end
 
+  get('/topics/:topic/new_message') do
+
+    "plz god"
+  end
+
   get('/topics') do
     @keys = $redis.keys
     render(:erb, :topics)
@@ -95,9 +100,7 @@ class App < Sinatra::Base
     redirect to('/topics')
   end
 
-  get('/topics/:topic/new_message') do
-    "plz god"
-  end
+
 
   ########deletes###
     delete('/topics') do

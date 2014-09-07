@@ -15,6 +15,7 @@
       <%@all_topics.each do |topic| %>
           <% parsed = JSON.parse($redis.get(topic)) %>
           <% if @desired_topic == parsed["topic"] %>
+          <% @plz_god = parsed["title"] %>
           <article class="full_post">
             <h2> <%= parsed["title"] %> </h2>
             <p class="signature"> posted by: <%= parsed["username"] %>
@@ -22,7 +23,10 @@
             <h3> <%= message["message"] %> </h3>
             <p class="signature"> posted by: <%= message["username"] %>
             <% end %>
-            <a href ="/topics/<%=@desired_topic %>/new_message"> post a reply </a>
+            <form method="get" action="/topics/<%=@desired_topic %>/new_message">
+              <input type="hidden" name ="correct_topic" value="<%=@desired_title %>"/>
+              <input type="submit"  value="reply"/>
+            </form>
 
           <% @selected_topic = topic %>
           <!-- can put an else here to show an error message? -->
