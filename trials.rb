@@ -144,3 +144,19 @@ all_topics.each do |topic|
             ]
           }
 
+{"topic" => "where is my mind",
+  "title" => "where is it??",
+  "username" => "brad manning",
+  "messages" => [
+              { "message" => "i lost it!",
+                "id" => "message1",
+                "username" => "ade",
+                "vote-count" => 0},
+              {"message" => "what's the issue?",
+                "username" => "rob"},
+              {"message" => "her mind is gone!",
+                "username" => "jacki"},
+            ]
+          }
+
+

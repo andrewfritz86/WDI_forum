@@ -83,7 +83,10 @@ class App < Sinatra::Base
     hash = {
         "topic" => topic,
         "username" => username,
-        "message" => message,
+        "messages" => [{"message" => message,
+                        "username" => username,
+        }
+          ],
         "title" => title
           }
     hash = hash.to_json
