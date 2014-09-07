@@ -59,7 +59,7 @@ footer {
 }
 
 .new_topic_link {
-  font-size: 1.25em;
+  font-size: 0.25em;
   text-align :center;
   margin: 25px;
 }
@@ -70,6 +70,12 @@ footer {
   background-color: lightgreen;
   border-radius: 10px;
   width: 300px;
+  margin: 0 auto;
+}
+
+.header {
+  position: fixed;
+  text-align: center;
   margin: 0 auto;
 }
 

@@ -95,6 +95,9 @@ class App < Sinatra::Base
     redirect to('/topics')
   end
 
+  get('/topics/:topic/new_message') do
+    "plz god"
+  end
 
   ########deletes###
     delete('/topics') do
@@ -107,5 +110,13 @@ class App < Sinatra::Base
     end
     redirect to('/topics')
     end
+  end
 
-end
+
+########puts #####
+  # put('/topics/:topic/new_message') do
+  #   @current_hash = JSON.parse(redis.get(params["topic"]))
+  #   @new_message = params["new_message"]
+  #   @current_hash["messages"].push(@new_message)
+  #   redirect to('/topics')
+  # end

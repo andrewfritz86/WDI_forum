@@ -1,7 +1,4 @@
 
-<div class="new_topic_link" > <a href="/topics/new"> post a new topic </a> </div>
-
-
 <%if @desired_topic == nil%>
     <% @keys.each do |key| %>
     <% parsed = JSON.parse($redis.get(key)) %>
@@ -25,6 +22,7 @@
             <h3> <%= message["message"] %> </h3>
             <p class="signature"> posted by: <%= message["username"] %>
             <% end %>
+            <a href ="/topics/<%=@desired_topic %>/new_message"> post a reply </a>
 
           <% @selected_topic = topic %>
           <!-- can put an else here to show an error message? -->
