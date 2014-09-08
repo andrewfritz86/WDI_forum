@@ -1,7 +1,7 @@
 
 <%if @slug == nil%>
 
-    <% JSON.parse($redis.get('data')).each do |x| %>
+    <% JSON.parse($redis.get('data')).reverse.each do |x| %>
       <article class="full_post">
       <h2> <a href ="/topics/<%= x["slug"] %>"><%= x["topic"] %></a> </h2>
       <h3> <%= x["body"] %> </h3>

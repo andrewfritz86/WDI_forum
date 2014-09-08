@@ -50,6 +50,11 @@ class App < Sinatra::Base
     redirect to ('/topics')
   end
 
+  get('/topics/new') do
+    render(:erb, :new_topic)
+  end
+
+
   get('/topics/:topic') do
     @slug = params["topic"]
     render(:erb, :topics)
@@ -59,9 +64,6 @@ class App < Sinatra::Base
     render(:erb, :topics)
   end
 
-  get('/topics/new') do
-    render(:erb, :new_topic)
-  end
 
   get('/topics/:topic/new_message') do
     @title = params["correct_topic"]
@@ -87,24 +89,26 @@ class App < Sinatra::Base
   post('/topics') do
     #there should be logic here to make sure that all fields are cointain
     #something, ie parameters aren't nil
-    topic = cleanup(params["topic"])#eventually this will gsub to a SLUG
+    @slug = cleanup(params["topic"])#eventually this will gsub to a SLUG
     ##title should be URL or URI
-    title = params["topic"]
-    message = params["message"]
+    topic = params["topic"]
+    body = params["body"]
     username = params["username"]
+    binding.pry
 
-    hash = {
+    new_hash = {
         "topic" => topic,
+        "slug" => @slug,
         "username" => username,
-        "messages" => [{"message" => message,
-                        "username" => username,
-        }
-          ],
-        "title" => title
+        "body" => body,
+        "vote_count" => 0,
+        "messages" => [],
           }
-    hash = hash.to_json
-    $redis.set(title,hash)
-    # binding.pry
+    binding.pry
+    new_structure = JSON.parse($redis.get('data')).push(new_hash)
+    new_structure = new_structure.to_json
+    $redis.set('data',new_structure)
+    binding.pry
     redirect to('/topics')
   end
 
