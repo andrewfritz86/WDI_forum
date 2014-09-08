@@ -15,9 +15,13 @@
       <% @delete = x["topic"] %>
       <% @reply = x["topic"]  %>
       <article class="full_post">
+        <section class="body">
           <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
           <h3> <%= x["body"] %> </h3>
           posted by: <%= x["username"] %>
+        </br>
+          vote count: <%= x["vote_count"].to_s %>
+        </section>
           <% x["messages"].each do |message| %>
           <section class="reply">
           <h3> <%= message["message"] %> </h3>
@@ -32,6 +36,13 @@
           <input type="submit"  value="reply"/>
         </form>
 <!-- reply form -->
+<!-- vote form -->
+        <form method="get" action="/topics/<%= @slug %>/vote">
+          <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
+          <input type="submit"  value="vote"/>
+        </form>
+
+<!-- vote form -->
 <!-- delete form  -->
        <form method="POST" action="/topics">
           <input type="hidden" name="_method" value="DELETE" />

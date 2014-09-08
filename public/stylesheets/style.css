@@ -96,9 +96,22 @@ footer {
 
 .reply {
   text-align: center;
-
+  border: 5px solid #B87094
+;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #FFFF66
+;
 }
 
+.body {
+  border: 5px solid #B87094
+;
+  margin: 5px;
+  background-color: #00CCFF;
+
+  padding:10px;
+}
 
 .fixed {
   position: fixed;
@@ -106,6 +119,14 @@ footer {
 
 .new_post_link {
   font-size: 20px;
+}
+
+.all_topics {
+  font-size:3em;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+
 }
 
 

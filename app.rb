@@ -64,6 +64,16 @@ class App < Sinatra::Base
     render(:erb, :topics)
   end
 
+  get('/topics/:topic/vote') do
+    new_vote = $parsed.each do |x|
+      if x["topic"] == params["correct_topic"]
+        x["vote_count"] += 1
+      end
+    end
+    new_vote = new_vote.to_json
+    $redis.set('data',new_vote)
+    redirect back
+  end
 
   get('/topics/:topic/new_message') do
     @topic = params["correct_topic"]
