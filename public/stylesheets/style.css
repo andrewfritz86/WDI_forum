@@ -16,6 +16,12 @@ h3 {
   font-size: 1em;
 }
 
+h4 {
+  color: #444444;
+  font-size: 2.0em;
+  text-decoration: none;
+}
+
 body {
   background-color:   #f2f1ed;
   font-family: Futura;
@@ -62,11 +68,11 @@ footer {
     border-radius: 10px;
     margin: 0 auto;
     background-color: #f2f1ed;
-
-
-
 }
 
+.param{
+  color: #666666;
+}
 .new_topic_link {
   font-size: 0.25em;
   text-align :center;
@@ -75,8 +81,8 @@ footer {
 
 .new_topic {
   padding: 20px;
-  border: 10px solid lightblue;
-  background-color: lightgreen;
+  border: 6px solid #666666;
+  background-color: #f2f1ed;
   border-radius: 10px;
   width: 300px;
   margin: 0 auto;
@@ -139,7 +145,7 @@ input[type=submit] {
     width: 100px;
     height:25px;
     font-family: Helvetica;
-    background-color: lightblue;
+    background-color: #444444;
     color: white;
 
     /* W3C */
