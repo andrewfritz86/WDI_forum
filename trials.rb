@@ -160,3 +160,22 @@ all_topics.each do |topic|
           }
 
 
+"data" => [{
+  "topic" => "here is a demo topic",
+  "body" => "hey guys! here is the body of the topic",
+  "messages" => [
+                {"message" => "hey sup"},
+                {"message" => "Hi, lol"},
+                {"message" => "help"},
+                  ],
+  "username" => "andy",
+}
+  "topic" => "what is the meaning of life?",
+  "body" => "I have been thinking about that for a while"
+  "messages" => [
+                {"message" => "me too"},
+                {"message" => "so have I"},
+                {"message" => "i have never had such a thought"},
+                ]
+]
+

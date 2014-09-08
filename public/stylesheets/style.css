@@ -18,6 +18,10 @@ h3 {
 body {
   background-color:   #FFBF7E;
   font-family: Futura;
+
+
+
+
 }
 
 a:link {
@@ -40,6 +44,7 @@ footer {
   color:white;
   text-align: center;
   padding: 25px;
+  float: right;
 }
 
 
@@ -50,12 +55,14 @@ footer {
 }
 
 .full_post {
-    width: 700px;
+    width: 80%;
     padding: 25px;
-    border: 10px solid lightblue;
+    border: 5px solid lightblue;
     border-radius: 10px;
     margin: 0 auto;
     background-color: lightgreen;
+
+
 }
 
 .new_topic_link {
@@ -74,10 +81,29 @@ footer {
 }
 
 .header {
-  position: fixed;
+  border: 10px solid lightblue;
+  align:center;
   text-align: center;
   margin: 0 auto;
+  padding-bottom: 70px;
+  font-size: 4em;
+  background-color:   #FFBF7E;
+  width: 98%;
+  position: fixed;
+  top:0px;
+
+
+
 }
+.fixed {
+  position: fixed;
+}
+
+.new_post_link {
+  font-size: 20px;
+}
+
+
 
 input[type=submit] {
     border-radius: 5px;

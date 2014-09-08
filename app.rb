@@ -81,7 +81,7 @@ class App < Sinatra::Base
     #there should be logic here to make sure that all fields are cointain
     #something, ie parameters aren't nil
     topic = cleanup(params["topic"])#eventually this will gsub to a SLUG
-
+    ##title should be URL or URI
     title = params["topic"]
     message = params["message"]
     username = params["username"]
