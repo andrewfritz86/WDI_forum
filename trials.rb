@@ -128,7 +128,7 @@ all_topics.each do |topic|
 
 
 
-
+###old, working structure ###
 {"topic" => "I don't get redis",
   "title" => "I don't get redis",
   "username" => "darth vader",
@@ -160,6 +160,7 @@ all_topics.each do |topic|
           }
 
 ###remember, this structure is a value for a key in redis called data
+###new structure ###
 data_array = [
   {
   "topic" => "here is a demo topic",

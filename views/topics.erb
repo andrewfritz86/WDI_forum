@@ -1,42 +1,41 @@
 
-<%if @desired_topic == nil%>
-    <% @keys.each do |key| %>
-    <% parsed = JSON.parse($redis.get(key)) %>
-    <article class="full_post">
-      <h2> <a href="/topics/<%=parsed["topic"]%>"> <%= parsed["title"] %></a> </h2>
-      <h3> <%= parsed["messages"][0]["message"] %> </h3>
-      <p class="signature"> posted by: <%= parsed["username"] %>
+<%if @slug == nil%>
 
-    </article>
-  </br>
+    <% JSON.parse($redis.get('data')).each do |x| %>
+      <article class="full_post">
+      <h2> <a href ="/topics/<%= x["slug"] %>"><%= x["topic"] %></a> </h2>
+      <h3> <%= x["body"] %> </h3>
+      <p class="signature"> posted by: <%= x["username"] %> </p>
+      </article>
+      </br>
     <% end %>
 <%else%>
-</br>
-      <%@all_topics.each do |topic| %>
-          <% parsed = JSON.parse($redis.get(topic)) %>
-          <% if @desired_topic == parsed["topic"] %>
-          <% @desired_title = parsed["title"] %>
-          <article class="full_post">
-            <h2> <%= parsed["title"] %> </h2>
-            <p class="signature"> posted by: <%= parsed["username"] %>
-            <% parsed["messages"].reverse.each do |message| %>
-            <h3> <%= message["message"] %> </h3>
-            <p class="signature"> posted by: <%= message["username"] %>
-            <% end %>
+    <% JSON.parse($redis.get('data')).each do |x| %>
+      <% if x["slug"] == @slug %>
+      <article class="full_post">
+          <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
+          <h3> <%= x["body"] %> </h3>
+          <p class="signature"> posted by: <%= x["username"] %> </p>
+
             <form method="get" action="/topics/<%=@desired_topic %>/new_message">
               <input type="hidden" name ="correct_topic" value="<%=@desired_title %>"/>
               <input type="submit"  value="reply"/>
             </form>
 
-          <% @selected_topic = topic %>
-          <!-- can put an else here to show an error message? -->
-          <% end %>
-        <% end %>
-        <form method="POST" action="/topics">
+       <form method="POST" action="/topics">
           <input type="hidden" name="_method" value="DELETE" />
           <input type="hidden" name="topic" value ="<%= @selected_topic%>"/>
           <input type ="submit"  name="delete" value="delete topic"/>
         </form>
         <a href ="/topics"> back to all topics </a>
       </article>
+
+  <% end %>
+<% end %>
+
+
+
+
+
+
 <% end %>

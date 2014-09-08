@@ -50,6 +50,15 @@ class App < Sinatra::Base
     redirect to ('/topics')
   end
 
+  get('/topics/:topic') do
+    @slug = params["topic"]
+    render(:erb, :topics)
+  end
+
+  get('/topics') do
+    render(:erb, :topics)
+  end
+
   get('/topics/new') do
     render(:erb, :new_topic)
   end
@@ -60,17 +69,14 @@ class App < Sinatra::Base
     render(:erb, :new_message)
   end
 
-  get('/topics') do
-    @keys = $redis.keys
+  get('/topics/:topic') do
+    @slug = params["topic"]
+
     render(:erb, :topics)
   end
 
-  get('/topics/:topic') do
-    @desired_topic = params["topic"]
-    @all_topics = $redis.keys
-    # binding.pry
-    render(:erb, :topics)
-  end
+
+
 
 
 ################
