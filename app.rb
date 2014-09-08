@@ -94,7 +94,6 @@ class App < Sinatra::Base
     topic = params["topic"]
     body = params["body"]
     username = params["username"]
-    binding.pry
 
     new_hash = {
         "topic" => topic,
@@ -104,11 +103,9 @@ class App < Sinatra::Base
         "vote_count" => 0,
         "messages" => [],
           }
-    binding.pry
     new_structure = JSON.parse($redis.get('data')).push(new_hash)
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
-    binding.pry
     redirect to('/topics')
   end
 
@@ -132,21 +129,15 @@ class App < Sinatra::Base
   ########deletes###
     delete('/topics') do
     delete_topic = params["topic"]
-    # binding.pry
-    $redis.keys.each do |topic|
-      if topic == delete_topic
-        $redis.del(topic)
-      end
-    end
+    index = $parsed.index { |x| x["topic"] == delete_topic}
+    $parsed.delete_at(index)
+    new_structure = $parsed.to_json
+    $redis.set('data',new_structure)
     redirect to('/topics')
     end
+
+
+
   end
 
 
-########puts #####
-  # put('/topics/:topic/new_message') do
-  #   @current_hash = JSON.parse(redis.get(params["topic"]))
-  #   @new_message = params["new_message"]
-  #   @current_hash["messages"].push(@new_message)
-  #   redirect to('/topics')
-  # end
