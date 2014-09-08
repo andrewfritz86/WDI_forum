@@ -15,6 +15,7 @@ class App < Sinatra::Base
     enable :sessions
     $redis = Redis.new
     $size = $redis.keys.size
+    $parsed = JSON.parse($redis.get('data'))
   end
 
   before do
