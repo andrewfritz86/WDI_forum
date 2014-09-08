@@ -6,17 +6,18 @@ h1 {
 }
 
 h2 {
-  color: green;
+  color: #444444;
   font-size: 2.0em;
+  text-decoration: underline;
 }
 
 h3 {
-  color: #E88DFF;
+  color: #de5a51;
   font-size: 1em;
 }
 
 body {
-  background-color:   #FFBF7E;
+  background-color:   #f2f1ed;
   font-family: Futura;
 
 
@@ -25,17 +26,17 @@ body {
 }
 
 a:link {
-  color: white;
+  color: #444444;
   text-decoration: none;
 }
 
 a:visited {
-  color: white;
+  color: #444444;
   text-decoration: none;
 }
 
 a:hover {
-  color:#FFFFA9
+  color:#FFA347
 ;
   text-decoration: none;
 }
@@ -57,10 +58,11 @@ footer {
 .full_post {
     width: 80%;
     padding: 25px;
-    border: 5px solid lightblue;
+    border: 5px solid #444444;
     border-radius: 10px;
     margin: 0 auto;
-    background-color: lightgreen;
+    background-color: #f2f1ed;
+
 
 
 }
@@ -81,14 +83,14 @@ footer {
 }
 
 .header {
-  border: 10px solid lightblue;
+  border: 6px solid #444444;
   align:center;
   text-align: center;
   margin: 0 auto;
   padding-bottom: 70px;
   font-size: 4em;
-  background-color:   #FFBF7E;
-  width: 98%;
+  background-color:   #f2f1ed;
+  width: 99%;
   position: fixed;
   top:0px;
 
@@ -96,19 +98,19 @@ footer {
 
 .reply {
   text-align: center;
-  border: 5px solid #B87094
+  border: 5px solid #444444
 ;
   margin: 5px;
   border-radius: 10px;
-  background-color: #FFFF66
+  background-color: white;
 ;
 }
 
 .body {
-  border: 5px solid #B87094
+  border: 5px solid #444444
 ;
   margin: 5px;
-  background-color: #00CCFF;
+  background-color: #f2f1ed;
 
   padding:10px;
 }
@@ -126,8 +128,8 @@ footer {
   color: white;
   text-align: center;
   border-radius: 10px;
-
 }
+
 
 
 

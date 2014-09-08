@@ -24,6 +24,7 @@
         </br>
           vote count: <%= x["vote_count"].to_s %>
 <!-- reply form -->
+        <section class="button_list">
         <form method="get" action="/topics/<%= @slug %>/new_message">
           <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
           <input type="submit"  value="reply"/>
@@ -37,11 +38,12 @@
 
 <!-- vote form -->
 <!-- delete form  -->
-       <form method="POST" action="/topics">
+        <form method="POST" action="/topics">
           <input type="hidden" name="_method" value="DELETE" />
           <input type="hidden" name="topic" value ="<%= @delete%>"/>
           <input type ="submit"  name="delete" value="delete topic"/>
         </form>
+        </section>
         </section>
           <% x["messages"].each do |message| %>
           <section class="reply">
