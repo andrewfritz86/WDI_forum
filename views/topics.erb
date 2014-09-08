@@ -13,16 +13,21 @@
     <% JSON.parse($redis.get('data')).each do |x| %>
       <% if x["slug"] == @slug %>
       <% @delete = x["topic"] %>
+      <% @reply = x["topic"]  %>
       <article class="full_post">
           <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
           <h3> <%= x["body"] %> </h3>
+          <% x["messages"].each do |message| %>
+          <h3> <%= message["message"] %> </h3>
+          <% end %>
           <p class="signature"> posted by: <%= x["username"] %> </p>
-
-            <form method="get" action="/topics/<%=@desired_topic %>/new_message">
-              <input type="hidden" name ="correct_topic" value="<%=@desired_title %>"/>
-              <input type="submit"  value="reply"/>
-            </form>
-
+<!-- reply form -->
+        <form method="get" action="/topics/<%= @slug %>/new_message">
+          <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
+          <input type="submit"  value="reply"/>
+        </form>
+<!-- reply form -->
+<!-- delete form  -->
        <form method="POST" action="/topics">
           <input type="hidden" name="_method" value="DELETE" />
           <input type="hidden" name="topic" value ="<%= @delete%>"/>
@@ -30,7 +35,7 @@
         </form>
         <a href ="/topics"> back to all topics </a>
       </article>
-
+<!-- delete form  -->
   <% end %>
 <% end %>
 

@@ -66,8 +66,8 @@ class App < Sinatra::Base
 
 
   get('/topics/:topic/new_message') do
-    @title = params["correct_topic"]
-    @url_topic = params["topic"]
+    @topic = params["correct_topic"]
+    @slug = params["topic"]
     render(:erb, :new_message)
   end
 
@@ -112,14 +112,17 @@ class App < Sinatra::Base
 
   post('/topics/:topic/new_message') do
     @new_message = params["new_message"]
-    @topic_needed = params["title"]
+    @topic = params["title"]
+    @slug = params["topic"]
     new_hash = {"message" => @new_message,
                 "username" => "default"}
-    parsed = JSON.parse($redis.get(@topic_needed))
-    parsed["messages"].push(new_hash)
-    json = parsed.to_json
-    $redis.del(@topic_needed)
-    $redis.set(@topic_needed,json)
+    new_structure = $parsed.each do |x|
+      if x["topic"] == @topic
+        x["messages"].push(new_hash)
+      end
+    end
+    new_structure = new_structure.to_json
+    $redis.set('data',new_structure)
     redirect to('/topics')
 
   end
