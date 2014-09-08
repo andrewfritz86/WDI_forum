@@ -71,11 +71,18 @@ class App < Sinatra::Base
     render(:erb, :new_message)
   end
 
+  get('/topics/:topic/messages') do
+    @slug = params["topic"]
+    render(:erb, :all_messages)
+  end
+
   get('/topics/:topic') do
     @slug = params["topic"]
 
     render(:erb, :topics)
   end
+
+
 
 
 
@@ -114,8 +121,9 @@ class App < Sinatra::Base
     @new_message = params["new_message"]
     @topic = params["title"]
     @slug = params["topic"]
+    @username = params["username"]
     new_hash = {"message" => @new_message,
-                "username" => "default"}
+                "username" => @username}
     new_structure = $parsed.each do |x|
       if x["topic"] == @topic
         x["messages"].push(new_hash)
@@ -123,7 +131,8 @@ class App < Sinatra::Base
     end
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
-    redirect to('/topics')
+    redirect back
+
 
   end
 

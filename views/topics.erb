@@ -17,10 +17,15 @@
       <article class="full_post">
           <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
           <h3> <%= x["body"] %> </h3>
+          posted by: <%= x["username"] %>
           <% x["messages"].each do |message| %>
+          <section class="reply">
           <h3> <%= message["message"] %> </h3>
+          posted by: <%= message["username"] %>
+          </section>
           <% end %>
-          <p class="signature"> posted by: <%= x["username"] %> </p>
+        </br>
+      </br>
 <!-- reply form -->
         <form method="get" action="/topics/<%= @slug %>/new_message">
           <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>

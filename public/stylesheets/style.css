@@ -92,9 +92,14 @@ footer {
   position: fixed;
   top:0px;
 
+}
 
+.reply {
+  text-align: center;
 
 }
+
+
 .fixed {
   position: fixed;
 }

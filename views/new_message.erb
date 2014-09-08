@@ -1,8 +1,13 @@
         <section class="new_topic">
         <form method="POST" action="/topics/<%= @slug %>/new_message">
         <input type="hidden" name="_method" value="POST" />
+        reply?
           <input type="text" name="new_message"/>
+        </br>
+        your name?
+          <input type="text" name="username"/>
           <input type="hidden" name="title" value ="<%= @topic%>"/>
           <input type ="submit"  name="add" value="add reply"/>
         </form>
+          <a href="/topics/<%= @slug %>"> back to topic? </a>
       </section>

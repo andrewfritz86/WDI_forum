@@ -1,0 +1,12 @@
+<% $parsed.each do |x| %>
+  <% if x["slug"] == @slug %>
+    <% x["messages"].each do |message| %>
+    <section class="full_post">
+    <h3><%= message["message"] %></h3>
+    posted by: <%= message["username"] %>
+  </section>
+</br>
+    <% end %>
+  <% end %>
+<% end %>
+
