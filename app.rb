@@ -141,9 +141,7 @@ class App < Sinatra::Base
     end
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
-    redirect back
-
-
+    redirect to("/topics/#{@slug}")
   end
 
 

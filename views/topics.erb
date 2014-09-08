@@ -6,6 +6,8 @@
       <h2> <a href ="/topics/<%= x["slug"] %>"><%= x["topic"] %></a> </h2>
       <h3> <%= x["body"] %> </h3>
       <p class="signature"> posted by: <%= x["username"] %> </p>
+      <p class="signature"> reply count: <%= x["messages"].size %> </p>
+      <p class="signature"> vote count: <%= x["vote_count"] %> </p>
       </article>
       </br>
     <% end %>
@@ -18,18 +20,9 @@
         <section class="body">
           <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
           <h3> <%= x["body"] %> </h3>
-          posted by: <%= x["username"] %>
+          <p class="signature"> posted by: <%= x["username"] %> </p>
         </br>
           vote count: <%= x["vote_count"].to_s %>
-        </section>
-          <% x["messages"].each do |message| %>
-          <section class="reply">
-          <h3> <%= message["message"] %> </h3>
-          posted by: <%= message["username"] %>
-          </section>
-          <% end %>
-        </br>
-      </br>
 <!-- reply form -->
         <form method="get" action="/topics/<%= @slug %>/new_message">
           <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
@@ -49,15 +42,19 @@
           <input type="hidden" name="topic" value ="<%= @delete%>"/>
           <input type ="submit"  name="delete" value="delete topic"/>
         </form>
-        <a href ="/topics"> back to all topics </a>
+        </section>
+          <% x["messages"].each do |message| %>
+          <section class="reply">
+          <h3> <%= message["message"] %> </h3>
+          <p class="signature"> posted by: <%= message["username"] %> </p>
+          </section>
+          <% end %>
+        </br>
+      </br>
+
       </article>
 <!-- delete form  -->
   <% end %>
 <% end %>
-
-
-
-
-
 
 <% end %>
