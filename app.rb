@@ -46,8 +46,18 @@ class App < Sinatra::Base
   ##gets
   ###########
 
+
+
   get('/') do
     redirect to ('/topics')
+  end
+
+  get('/reorder') do
+    @reorder = true
+    @reorder_array = $parsed.sort do |item1, item2|
+     item1["vote_count"] <=> item2["vote_count"]
+    end
+    render(:erb, :reorder)
   end
 
   get('/topics/new') do
