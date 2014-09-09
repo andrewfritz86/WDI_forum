@@ -162,6 +162,7 @@ class App < Sinatra::Base
   ########deletes###
     delete('/topics') do
       delete_topic = params["topic"]
+      binding.pry
       index = $parsed.index { |x| x["topic"] == delete_topic}
       $parsed.delete_at(index)
       new_structure = $parsed.to_json
