@@ -1,8 +1,8 @@
-        <form method="get" action="/reorder">
+       <section class="order_button"> <form method="get" action="/reorder">
           <input type="hidden" name ="order" value="true"/>
           <input type="submit" value="order by vote"/>
         </form>
-
+        </section>
 
 <%if @slug == nil%>
     <h2 class="flash"> <%= flash.now[:notice] %> </h2>
@@ -51,6 +51,8 @@
           <input type="hidden" name="topic" value ="<%= @delete%>"/>
           <input type ="submit"  name="delete" value="delete topic"/>
         </form>
+      </br>
+    </br>
           <a href="/topics"> back to topics </a>
         </section>
         </section>

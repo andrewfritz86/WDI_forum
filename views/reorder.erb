@@ -1,10 +1,11 @@
-        <div class="reorder">
+        <div class="order_button">
           <form method="get" action="/topics">
           <input type="hidden" name ="order" value="true"/>
           <input type="submit" value="order by time"/>
           </form>
         </div>
 
+  </br>
 
     <% @reorder_array.reverse.each do |x| %>
       <article class="full_post">
