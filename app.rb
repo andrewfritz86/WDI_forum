@@ -80,7 +80,7 @@ class App < Sinatra::Base
   end
 
   get('/topics/:topic/vote') do
-    new_vote = $parsed.each do |x|
+    new_vote = JSON.parse($redis.get("data")).each do |x|
       if x["topic"] == params["correct_topic"]
         x["vote_count"] += 1
       end
