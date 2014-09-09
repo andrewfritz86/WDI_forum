@@ -1,7 +1,8 @@
 require 'sinatra/base'
-require 'pry'
+require 'pry' if ENV["RACK_ENV"] == "development"
 require 'json'
 require 'redis'
+require "uri"
 
 class App < Sinatra::Base
 
