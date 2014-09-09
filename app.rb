@@ -9,13 +9,14 @@ class App < Sinatra::Base
   # Configuration
   ########################
 #REDISTOGO_URL: redis://redistogo:f5674f911e85febab795662248492507@hoki.redistogo.com:11181/
-REDIS_URL = ENV["REDISTOGO_URL"]
-uri = URI.parse(ENV["REDISTOGO_URL"])
+
+
 
   configure do
     enable :logging
     enable :method_override
     enable :sessions
+    REDIS_URL = "redis://127.0.0.1:6379"
     $redis = Redis.new({:host => uri.host,
                         :port => uri.port,
                         :password => uri.password})
