@@ -20,7 +20,7 @@ class App < Sinatra::Base
     $redis = Redis.new({:host => uri.host,
                         :port => uri.port,
                         :password => uri.password})
-    $redis.setnx("data", [].to_json)
+    $redis.setnx("data", 0)
     $parsed = JSON.parse($redis.get('data'))
   end
 
