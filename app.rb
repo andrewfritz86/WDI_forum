@@ -8,12 +8,17 @@ class App < Sinatra::Base
   ########################
   # Configuration
   ########################
+#REDISTOGO_URL: redis://redistogo:f5674f911e85febab795662248492507@hoki.redistogo.com:11181/
+REDIS_URL = ENV["REDISTOGO_URL"]
+uri = URI.parse(ENV["REDISTOGO_URL"])
 
   configure do
     enable :logging
     enable :method_override
     enable :sessions
-    $redis = Redis.new
+    $redis = Redis.new({:host => uri.host,
+                        :port => uri.port,
+                        :password => uri.password})
     $size = $redis.keys.size
     $parsed = JSON.parse($redis.get('data'))
   end
