@@ -141,32 +141,32 @@ class App < Sinatra::Base
 
 
   post('/topics/:topic/new_message') do
-    @new_message = params["new_message"]
-    @topic = params["title"]
-    @slug = params["topic"]
-    @username = params["username"]
-    new_hash = {"message" => @new_message,
-                "username" => @username}
+    new_message = params["new_message"]
+    topic = params["title"]
+    slug = params["topic"]
+    username = params["username"]
+    new_hash = {"message" => new_message,
+                "username" => username}
     new_structure = $parsed.each do |x|
-      if x["topic"] == @topic
+      if x["topic"] == topic
         x["messages"].push(new_hash)
       end
     end
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
-    redirect to("/topics/#{@slug}")
+    redirect to("/topics/#{slug}")
   end
 
 
 
   ########deletes###
     delete('/topics') do
-    delete_topic = params["topic"]
-    index = $parsed.index { |x| x["topic"] == delete_topic}
-    $parsed.delete_at(index)
-    new_structure = $parsed.to_json
-    $redis.set('data',new_structure)
-    redirect to('/topics')
+      delete_topic = params["topic"]
+      index = $parsed.index { |x| x["topic"] == delete_topic}
+      $parsed.delete_at(index)
+      new_structure = $parsed.to_json
+      $redis.set('data',new_structure)
+      redirect to('/topics')
     end
 
 
