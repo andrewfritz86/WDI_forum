@@ -34,8 +34,8 @@ class App < Sinatra::Base
 
 
   #####methods ########
-
-  $parsed = JSON.parse($redis.get('data'))
+  ##maybe this is the issue
+  # $parsed = JSON.parse($redis.get('data'))
 
   def cleanup(string)
     string = string.delete("?").delete("'").delete(",")
@@ -147,7 +147,7 @@ class App < Sinatra::Base
     username = params["username"]
     new_hash = {"message" => new_message,
                 "username" => username}
-    new_structure = $parsed.each do |x|
+    new_structure = JSON.parse($redis.get("data").each do |x|
       if x["topic"] == topic
         x["messages"].push(new_hash)
       end
