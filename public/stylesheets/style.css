@@ -30,6 +30,12 @@ h5 {
 body {
   background-color:   #D3D0C7;
   font-family: Futura;
+  background-image: url("https://generalassemb.ly/online/assets/ga-lockup-logo-9d95d5d0a1c966540edaedcb440b1963.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    opacity: 0.9;
+}
 
 }
 
