@@ -147,7 +147,7 @@ class App < Sinatra::Base
     username = params["username"]
     new_hash = {"message" => new_message,
                 "username" => username}
-    new_structure = JSON.parse($redis.get("data").each do |x|
+    new_structure = JSON.parse($redis.get("data")).each do |x|
       if x["topic"] == topic
         x["messages"].push(new_hash)
       end
