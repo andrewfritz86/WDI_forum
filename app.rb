@@ -20,8 +20,8 @@ class App < Sinatra::Base
     $redis = Redis.new({:host => uri.host,
                         :port => uri.port,
                         :password => uri.password})
-    $redis.setnx("data", 0)
-    $parsed = JSON.parse($redis.get('data'))
+    # $redis.setnx("data", 0)
+
   end
 
   before do
@@ -37,6 +37,7 @@ class App < Sinatra::Base
 
   #####methods ########
 
+  $parsed = JSON.parse($redis.get('data'))
 
   def cleanup(string)
     string = string.delete("?").delete("'").delete(",")
