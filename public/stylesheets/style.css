@@ -155,6 +155,13 @@ footer {
   font-size: 1.2em;
 }
 
+.flash {
+  text-align: center;
+  font-size: 1.2em;
+  color:#de5a51;
+  text-decoration: none;
+}
+
 
 input[type=submit] {
     border-radius: 5px;

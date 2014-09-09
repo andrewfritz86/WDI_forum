@@ -3,6 +3,7 @@ require 'pry' # if ENV["RACK_ENV"] == "development"
 require 'json'
 require 'redis'
 require 'uri'
+require 'sinatra/flash'
 
 class App < Sinatra::Base
 
@@ -20,7 +21,9 @@ class App < Sinatra::Base
     $redis = Redis.new({:host => uri.host,
                         :port => uri.port,
                         :password => uri.password})
+    register Sinatra::Flash
   end
+
 
   before do
     logger.info "Request Headers: #{headers}"
@@ -71,11 +74,13 @@ class App < Sinatra::Base
 
 
   get('/topics/:topic') do
+    flash.now[:reply] = "thanks for the reply!" if redirect?
     @slug = params["topic"]
     render(:erb, :topics)
   end
 
   get('/topics') do
+    flash.now[:notice] = "THANKS" if redirect?
     render(:erb, :topics)
   end
 
@@ -136,6 +141,7 @@ class App < Sinatra::Base
     new_structure = JSON.parse($redis.get('data')).push(new_hash)
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
+    flash.next[:notice] = "thanks for the post!"
     redirect to('/topics')
   end
 
@@ -154,6 +160,7 @@ class App < Sinatra::Base
     end
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
+    flash.next[:reply] = "thanks for the reply!"
     redirect to("/topics/#{slug}")
   end
 
