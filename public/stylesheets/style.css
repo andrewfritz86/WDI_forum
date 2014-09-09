@@ -47,8 +47,8 @@ a:visited {
 }
 
 a:hover {
-  color:#FFA347
-;
+
+  color: #CC8080;
   text-decoration: none;
 }
 
@@ -108,8 +108,8 @@ footer {
 }
 
 .reply {
-  text-align: center;
-  border: 5px solid #444444
+  border: 5px solid #444444;
+  padding: 5px;
 ;
   margin: 5px;
   border-radius: 10px;
@@ -146,15 +146,22 @@ footer {
   color:#de5a51;
 }
 
-
+.reorder {
+  margin: 0 auto;
+}
+.post_new
+{
+  text-align: center;
+  font-size: 1.2em;
+}
 
 
 input[type=submit] {
     border-radius: 5px;
     border: 0;
-    width: 100px;
+    width: 120px;
     height:25px;
-    font-family: Helvetica;
+    font-family: Futura;
     background-color: #444444;
     color: white;
 

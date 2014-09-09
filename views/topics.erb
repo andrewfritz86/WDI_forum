@@ -26,8 +26,10 @@
           <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
           <h3> <%= x["body"] %> </h3>
           <p class="signature"> posted by: <%= x["username"] %> </p>
-        </br>
+
           vote count: <%= x["vote_count"].to_s %>
+        </br>
+      </br>
 <!-- reply form -->
         <section class="button_list">
         <form method="get" action="/topics/<%= @slug %>/new_message">
@@ -48,6 +50,7 @@
           <input type="hidden" name="topic" value ="<%= @delete%>"/>
           <input type ="submit"  name="delete" value="delete topic"/>
         </form>
+          <a href="/topics"> back to topics </a>
         </section>
         </section>
           <% x["messages"].each do |message| %>
@@ -58,10 +61,13 @@
           <% end %>
         </br>
       </br>
-
+          <a href="/topics"> back to topics </a>
       </article>
+
 <!-- delete form  -->
   <% end %>
+
 <% end %>
+
 
 <% end %>
