@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'pry' if ENV["RACK_ENV"] == "development"
 require 'json'
 require 'redis'
-require "uri"
+require 'uri'
 
 class App < Sinatra::Base
 
@@ -17,7 +17,7 @@ class App < Sinatra::Base
     enable :logging
     enable :method_override
     enable :sessions
-    uri = URI.parse(ENV["REDISTOGO_URL"])
+    uri = URI.parse("redis://redistogo:f5674f911e85febab795662248492507@hoki.redistogo.com:11181/")
     $redis = Redis.new({:host => uri.host,
                         :port => uri.port,
                         :password => uri.password})
