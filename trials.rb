@@ -1,203 +1,203 @@
-###think of data as redis.set each hash individually
+# ###think of data as redis.set each hash individually
 
-data = {
-        "topic 1" => {
-          :topic => "blah blah blah",
-          :message => "opinion thought question etc",
-          :username => "billybob"
-        },
+# data = {
+#         "topic 1" => {
+#           :topic => "blah blah blah",
+#           :message => "opinion thought question etc",
+#           :username => "billybob"
+#         },
 
-        "topic 2" => {
-          :topic => "blah blah some more",
-          :message => "more opinions",
-          :username => "doug"
-        },
+#         "topic 2" => {
+#           :topic => "blah blah some more",
+#           :message => "more opinions",
+#           :username => "doug"
+#         },
 
-        "topic 3" => {
-          :topic => "yet another topic",
-          :message => "yet another message ",
-          :username => "joe"
-        }
-}
+#         "topic 3" => {
+#           :topic => "yet another topic",
+#           :message => "yet another message ",
+#           :username => "joe"
+#         }
+# }
 
-#^ each topic is a key, with a value of the name of the topic and a message
-#this would be easier for deleting topics
+# #^ each topic is a key, with a value of the name of the topic and a message
+# #this would be easier for deleting topics
 
-#can use a data.keys array to keep track of the overall amount of topics
-#for deleting, putting?
-
-
-#how will this work with SLUG urls?
-
-##post (/topics/new)
-##
+# #can use a data.keys array to keep track of the overall amount of topics
+# #for deleting, putting?
 
 
-#should make methods for converting to json/adding , parsing/removing
+# #how will this work with SLUG urls?
 
-###for pry testing
-
-require 'redis'
-require 'json'
-
-redis = Redis.new
-
-topic1 =
-
-      {
-          :topic => "blah blah blah",
-          :message => "opinion thought question etc",
-          :username => "billybob"
-        }
+# ##post (/topics/new)
+# ##
 
 
-topic2 =
+# #should make methods for converting to json/adding , parsing/removing
 
-  {
-    :topic => "blah blah some more",
-    :message => "more opinions",
-    :username => "doug"
-  }
+# ###for pry testing
 
+# require 'redis'
+# require 'json'
 
-topic3 =
-  {
-    :topic => "yet another topic",
-    :message => "yet another message ",
-    :username => "joe"
-  }
+# redis = Redis.new
 
+# topic1 =
 
-####everything needs to go to json before entering redis
-topic1 = topic1.to_json
-topic2 = topic2.to_json
-topic3 = topic3.to_json
-
-redis.set("topic 1", topic1)
-redis.set("topic 2", topic2)
-redis.set("topic 3", topic3)
-
-######multiple messages as part of an array?####
-{
-       :topic => "topic ahahhaha",
-    :username => "username",
-    :messages => [
-        [0] "hi",
-        [1] "hello",
-        [2] "thanks"
-    ]
-}
+#       {
+#           :topic => "blah blah blah",
+#           :message => "opinion thought question etc",
+#           :username => "billybob"
+#         }
 
 
+# topic2 =
+
+#   {
+#     :topic => "blah blah some more",
+#     :message => "more opinions",
+#     :username => "doug"
+#   }
 
 
-all_topics.each do |topic|
-          <%if topic == @desired_topic
-          <% parsed = JSON.parse($redis.get(topic))
-          <h2> <%= parsed["title"] %> </h2>
-          <h3> <%= parsed["message"] %> </h3>
-          <% end %>
-        <% end %>
+# topic3 =
+#   {
+#     :topic => "yet another topic",
+#     :message => "yet another message ",
+#     :username => "joe"
+#   }
 
 
-        $redis.keys.each do |topic|
-          parsed = JSON.parse(redis.get(topic))
-          if params["topic"] == parsed["topic"]
-            parsed["title"]
-          end
-        end
+# ####everything needs to go to json before entering redis
+# topic1 = topic1.to_json
+# topic2 = topic2.to_json
+# topic3 = topic3.to_json
+
+# redis.set("topic 1", topic1)
+# redis.set("topic 2", topic2)
+# redis.set("topic 3", topic3)
+
+# ######multiple messages as part of an array?####
+# {
+#        :topic => "topic ahahhaha",
+#     :username => "username",
+#     :messages => [
+#         [0] "hi",
+#         [1] "hello",
+#         [2] "thanks"
+#     ]
+# }
 
 
 
 
-#####sample structure with multiple messages#####
+# all_topics.each do |topic|
+#           <%if topic == @desired_topic
+#           <% parsed = JSON.parse($redis.get(topic))
+#           <h2> <%= parsed["title"] %> </h2>
+#           <h3> <%= parsed["message"] %> </h3>
+#           <% end %>
+#         <% end %>
+
+
+#         $redis.keys.each do |topic|
+#           parsed = JSON.parse($redis.get(topic))
+#           if params["topic"] == parsed["topic"]
+#             parsed["title"]
+#           end
+#         end
 
 
 
-{"topic" => "example topic",
-  "title" => "example topic",
-  "username" => "username",
-  "messages" => [
-              { "message" => "message contents",
-                "id" => "message1",
-                "vote-count" => 0},
-              {"message" => "message contetnts 2"},
-              {"message" => "message contents 3"},
-            ]
-          }
+
+# #####sample structure with multiple messages#####
 
 
 
-###old, working structure ###
-{"topic" => "I don't get redis",
-  "title" => "I don't get redis",
-  "username" => "darth vader",
-  "messages" => [
-              { "message" => "it makes no sense!",
-                "id" => "message1",
-                "username" => "ade",
-                "vote-count" => 0},
-              {"message" => "what's the issue?",
-                "username" => "rob"},
-              {"message" => "I can help!",
-                "username" => "jacki"},
-            ]
-          }
+# {"topic" => "example topic",
+#   "title" => "example topic",
+#   "username" => "username",
+#   "messages" => [
+#               { "message" => "message contents",
+#                 "id" => "message1",
+#                 "vote-count" => 0},
+#               {"message" => "message contetnts 2"},
+#               {"message" => "message contents 3"},
+#             ]
+#           }
 
-{"topic" => "where is my mind",
-  "title" => "where is it??",
-  "username" => "brad manning",
-  "messages" => [
-              { "message" => "i lost it!",
-                "id" => "message1",
-                "username" => "ade",
-                "vote-count" => 0},
-              {"message" => "what's the issue?",
-                "username" => "rob"},
-              {"message" => "her mind is gone!",
-                "username" => "jacki"},
-            ]
-          }
 
-###remember, this structure is a value for a key in redis called data
-###new structure ###
-data_array = [
-  {
-  "topic" => "here is a demo topic",
-  "username" => "default",
-  "slug" => "here-is-a-demo-topic",
-  "body" => "hey guys! here is the body of the topic",
-  "vote_count" => 0,
-  "messages" => [
-                {"message" => "hey sup", "username" => "default"},
-                {"message" => "Hi, lol", "username" => "default"},
-                {"message" => "help", "username" => "default"},
-                ],
-},
 
-  {
-  "topic" => "what is the meaning of life?",
-  "username" => "default",
-  "slug" => "what-is-the-meaning-of-life",
-  "body" => "I have been thinking about that for a while",
-  "vote_count" => 0,
-  "messages" => [
-                {"message" => "me too", "username" => "default"},
-                {"message" => "so have I", "username" => "default"},
-                {"message" => "i have never had such a thought", "username" => "default"},
-                ]
-  },
-    {
-  "topic" => "here is a third topic.",
-  "username" => "default",
-  "slug" => "here-is-a-third-topic",
-  "body" => "tis the third",
-  "vote_count" => 0,
-  "messages" => [
-                {"message" => "yep", "username" => "default"},
-                {"message" => "second reply", "username" => "default"},
-                {"message" => "third reply", "username" => "default"},
-                ]
-              }
-]
+# ###old, working structure ###
+# {"topic" => "I don't get redis",
+#   "title" => "I don't get redis",
+#   "username" => "darth vader",
+#   "messages" => [
+#               { "message" => "it makes no sense!",
+#                 "id" => "message1",
+#                 "username" => "ade",
+#                 "vote-count" => 0},
+#               {"message" => "what's the issue?",
+#                 "username" => "rob"},
+#               {"message" => "I can help!",
+#                 "username" => "jacki"},
+#             ]
+#           }
+
+# {"topic" => "where is my mind",
+#   "title" => "where is it??",
+#   "username" => "brad manning",
+#   "messages" => [
+#               { "message" => "i lost it!",
+#                 "id" => "message1",
+#                 "username" => "ade",
+#                 "vote-count" => 0},
+#               {"message" => "what's the issue?",
+#                 "username" => "rob"},
+#               {"message" => "her mind is gone!",
+#                 "username" => "jacki"},
+#             ]
+#           }
+
+# ###remember, this structure is a value for a key in redis called data
+# ###new structure ###
+# data_array = [
+#   {
+#   "topic" => "here is a demo topic",
+#   "username" => "default",
+#   "slug" => "here-is-a-demo-topic",
+#   "body" => "hey guys! here is the body of the topic",
+#   "vote_count" => 0,
+#   "messages" => [
+#                 {"message" => "hey sup", "username" => "default"},
+#                 {"message" => "Hi, lol", "username" => "default"},
+#                 {"message" => "help", "username" => "default"},
+#                 ],
+# },
+
+#   {
+#   "topic" => "what is the meaning of life?",
+#   "username" => "default",
+#   "slug" => "what-is-the-meaning-of-life",
+#   "body" => "I have been thinking about that for a while",
+#   "vote_count" => 0,
+#   "messages" => [
+#                 {"message" => "me too", "username" => "default"},
+#                 {"message" => "so have I", "username" => "default"},
+#                 {"message" => "i have never had such a thought", "username" => "default"},
+#                 ]
+#   },
+#     {
+#   "topic" => "here is a third topic.",
+#   "username" => "default",
+#   "slug" => "here-is-a-third-topic",
+#   "body" => "tis the third",
+#   "vote_count" => 0,
+#   "messages" => [
+#                 {"message" => "yep", "username" => "default"},
+#                 {"message" => "second reply", "username" => "default"},
+#                 {"message" => "third reply", "username" => "default"},
+#                 ]
+#               }
+# ]
 

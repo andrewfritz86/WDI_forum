@@ -16,6 +16,7 @@ group :production do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec',    '~> 3.0.0'
+  gem 'capybara', '~> 2.4.1'
 end
 
