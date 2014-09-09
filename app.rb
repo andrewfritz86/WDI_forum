@@ -163,10 +163,10 @@ class App < Sinatra::Base
     delete('/topics') do
       delete_topic = params["topic"]
       binding.pry
-      index = $parsed.index { |x| x["topic"] == delete_topic}
-      $parsed.delete_at(index)
-      new_structure = $parsed.to_json
-      $redis.set('data',new_structure)
+      index = JSON.parse($redis.get("data")).index { |x| x["topic"] == delete_topic}
+      JSON.parse($redis.get("data")).delete_at(index)
+      new_structure = JSON.parse($redis.get("data")).to_json
+      JSON.parse($redis.get("data")).set('data',new_structure)
       redirect to('/topics')
     end
 
