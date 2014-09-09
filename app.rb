@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'pry' if ENV["RACK_ENV"] == "development"
+require 'pry' # if ENV["RACK_ENV"] == "development"
 require 'json'
 require 'redis'
 require 'uri'
@@ -12,7 +12,6 @@ class App < Sinatra::Base
 #REDISTOGO_URL: redis://redistogo:f5674f911e85febab795662248492507@hoki.redistogo.com:11181/
 
 
-
   configure do
     enable :logging
     enable :method_override
@@ -22,6 +21,7 @@ class App < Sinatra::Base
                         :port => uri.port,
                         :password => uri.password})
     $size = $redis.keys.size
+    binding.pry
     $parsed = JSON.parse($redis.get('data'))
   end
 
