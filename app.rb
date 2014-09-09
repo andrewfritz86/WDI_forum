@@ -20,19 +20,20 @@ class App < Sinatra::Base
     $redis = Redis.new({:host => uri.host,
                         :port => uri.port,
                         :password => uri.password})
-    $redis.setnx("data", [
-    {
-    "topic" => "here is a demo topic",
-    "username" => "default",
-    "slug" => "here-is-a-demo-topic",
-    "body" => "hey guys! here is the body of the topic",
-    "vote_count" => 0,
-    "messages" => [
-                  {"message" => "hey sup", "username" => "default"},
-                  {"message" => "Hi, lol", "username" => "default"},
-                  {"message" => "help", "username" => "default"},
-                  ],
-   }].to_json)
+    binding.pry
+   #  $redis.setnx("data", [
+   #  {
+   #  "topic" => "here is a demo topic",
+   #  "username" => "default",
+   #  "slug" => "here-is-a-demo-topic",
+   #  "body" => "hey guys! here is the body of the topic",
+   #  "vote_count" => 0,
+   #  "messages" => [
+   #                {"message" => "hey sup", "username" => "default"},
+   #                {"message" => "Hi, lol", "username" => "default"},
+   #                {"message" => "help", "username" => "default"},
+   #                ],
+   # }].to_json)
 
   end
 
