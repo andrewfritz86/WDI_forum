@@ -105,7 +105,6 @@ class App < Sinatra::Base
 
   get('/topics/:topic') do
     @slug = params["topic"]
-
     render(:erb, :topics)
   end
 
@@ -128,7 +127,6 @@ class App < Sinatra::Base
     topic = params["topic"]
     body = params["body"]
     username = params["username"]
-
     new_hash = {
         "topic" => topic,
         "slug" => @slug,
