@@ -1,4 +1,4 @@
-<% $parsed.each do |x| %>
+<% parsed.each do |x| %>
   <% if x["slug"] == @slug %>
   <h2 class="all_topics"> Here all the messages for the topic <%= x["topic"] %> </h2>
     <% x["messages"].each do |message| %>

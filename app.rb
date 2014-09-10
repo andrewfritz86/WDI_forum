@@ -10,8 +10,6 @@ class App < Sinatra::Base
   ########################
   # Configuration
   ########################
-#REDISTOGO_URL: redis://redistogo:f5674f911e85febab795662248492507@hoki.redistogo.com:11181/
-
 
   configure do
     enable :logging
@@ -53,10 +51,8 @@ class App < Sinatra::Base
   ########################
 
   ############
-  ##gets
+  ##get routes
   ###########
-
-
 
   get('/') do
     redirect to ('/topics')
@@ -73,7 +69,6 @@ class App < Sinatra::Base
   get('/topics/new') do
     render(:erb, :new_topic)
   end
-
 
   get('/topics/:topic') do
     flash.now[:reply] = "thanks for the reply!" if redirect?
@@ -120,15 +115,14 @@ class App < Sinatra::Base
 
 
 ################
-# ###posts
+## post routes
 ################
 
 
   post('/topics') do
     #there should be logic here to make sure that all fields are cointain
     #something, ie parameters aren't nil
-    slug = cleanup(params["topic"])#eventually this will gsub to a SLUG
-    ##title should be URL or URI
+    slug = cleanup(params["topic"])
     topic = params["topic"]
     body = params["body"]
     username = params["username"]
@@ -139,7 +133,7 @@ class App < Sinatra::Base
         "body" => body,
         "vote_count" => 0,
         "messages" => [],
-          }
+      }
     new_structure = parsed.push(new_hash)
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
@@ -168,11 +162,16 @@ class App < Sinatra::Base
 
 
 
-  ########deletes###
+
+
+################
+## delete routes
+################
+
     delete('/topics') do
       delete_topic = params["topic"]
       index = parsed.index { |x| x["topic"] == delete_topic}.to_i
-      present_structure = JSON.parse($redis.get("data"))
+      present_structure = parsed
       present_structure.delete_at(index)
       new_structure = present_structure.to_json
       $redis.set('data',new_structure)
