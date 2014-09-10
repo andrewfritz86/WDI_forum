@@ -6,6 +6,7 @@ The WDI forum was developed by Andy Fritz as the first individual project for th
 
 Work will continue on the project, as there are plenty of features left to add. However, a stable, MVP version of the project was presented on September 10th, 2014.
 
+<img src="http://imgur.com/RYDDgBW">
 
 # Technologies Used #
 
