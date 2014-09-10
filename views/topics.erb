@@ -1,8 +1,9 @@
-   <section class="order_button"> <form method="get" action="/reorder">
-      <input type="hidden" name ="order" value="true"/>
-      <input type="submit" value="order by vote"/>
-    </form>
-    </section>
+<section class="order_button">
+  <form method="get" action="/reorder">
+    <input type="hidden" name ="order" value="true"/>
+    <input type="submit" value="order by vote"/>
+  </form>
+</section>
 
 <%if @slug == nil%>
     <h2 class="flash"> <%= flash.now[:notice] %> </h2>
@@ -14,7 +15,7 @@
     <% parsed.each do |x| %>
       <%= render(:erb, :_topic, :locals => {:x => x}) %>
     <% end %>
-      </br>
-      </br>
+    </br>
+    </br>
     <a href="/topics"> back to topics </a>
 <% end %>

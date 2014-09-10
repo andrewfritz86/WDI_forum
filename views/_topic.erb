@@ -1,46 +1,46 @@
-      <% if x["slug"] == @slug %>
-      <% @delete = x["topic"] %>
-      <% @reply = x["topic"]  %>
-          <article class="full_post">
-            <section class="body">
-              <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
-              <h3> <%= x["body"] %> </h3>
-              <p class="signature"> posted by: <%= x["username"] %> </p>
-              vote count: <%= x["vote_count"].to_s %>
-              </br>
-              </br>
-  <!-- begin forms -->
+<% if x["slug"] == @slug %>
+<% @delete = x["topic"] %>
+<% @reply = x["topic"]  %>
+    <article class="full_post">
+      <section class="body">
+        <h2> <a href ="/topics/<%=x["slug"]%>"> <%= x["topic"] %></a> </h2>
+        <h3> <%= x["body"] %> </h3>
+        <p class="signature"> posted by: <%= x["username"] %> </p>
+        vote count: <%= x["vote_count"].to_s %>
+        </br>
+        </br>
+<!-- begin forms -->
     <!-- reply form -->
-                <section class="button_list">
-                  <form method="get" action="/topics/<%= @slug %>/new_message">
-                    <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
-                    <input type="submit"  value="reply"/>
-                  </form>
-          <!-- reply form -->
-          <!-- vote form -->
-                  <form method="get" action="/topics/<%= @slug %>/vote">
-                    <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
-                    <input type="submit"  value="vote"/>
-                  </form>
-          <!-- vote form -->
-          <!-- delete form  -->
-                  <form method="POST" action="/topics">
-                    <input type="hidden" name="_method" value="DELETE" />
-                    <input type="hidden" name="topic" value ="<%= @delete%>"/>
-                    <input type ="submit"  name="delete" value="delete topic"/>
-                  </form>
-          <!-- delete form -->
-        <!-- end forms -->
-                  </br>
-                  </br>
-                  <a href="/topics"> back to topics </a>
-                </section>
-            </section>
-              <% x["messages"].each do |message| %>
-                <section class="reply">
-                  <h3> <%= message["message"] %> </h3>
-                  <p class="signature"> posted by: <%= message["username"] %> </p>
-                </section>
-              <% end %>
-        </article>
-      <% end %>
+          <section class="button_list">
+            <form method="get" action="/topics/<%= @slug %>/new_message">
+              <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
+              <input type="submit"  value="reply"/>
+            </form>
+    <!-- reply form -->
+    <!-- vote form -->
+            <form method="get" action="/topics/<%= @slug %>/vote">
+              <input type="hidden" name ="correct_topic" value="<%= @reply %>"/>
+              <input type="submit"  value="vote"/>
+            </form>
+    <!-- vote form -->
+    <!-- delete form  -->
+            <form method="POST" action="/topics">
+              <input type="hidden" name="_method" value="DELETE" />
+              <input type="hidden" name="topic" value ="<%= @delete%>"/>
+              <input type ="submit"  name="delete" value="delete topic"/>
+            </form>
+    <!-- delete form -->
+<!-- end forms -->
+            </br>
+            </br>
+            <a href="/topics"> back to topics </a>
+          </section>
+      </section>
+        <% x["messages"].each do |message| %>
+          <section class="reply">
+            <h3> <%= message["message"] %> </h3>
+            <p class="signature"> posted by: <%= message["username"] %> </p>
+          </section>
+        <% end %>
+  </article>
+<% end %>
