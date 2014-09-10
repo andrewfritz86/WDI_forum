@@ -6,7 +6,7 @@
 
 <%if @slug == nil%>
     <h2 class="flash"> <%= flash.now[:notice] %> </h2>
-    <% JSON.parse($redis.get('data')).reverse.each do |x| %>
+    <% parsed.reverse.each do |x| %>
       <article class="full_post">
       <h2> <a href ="/topics/<%= x["slug"] %>"><%= x["topic"] %></a> </h2>
       <h3> <%= x["body"] %> </h3>
@@ -18,7 +18,7 @@
     <% end %>
 <%else%>
     <h2 class="flash"> <%= flash.now[:reply] %> </h2>
-    <% JSON.parse($redis.get('data')).each do |x| %>
+    <% parsed.each do |x| %>
       <% if x["slug"] == @slug %>
       <% @delete = x["topic"] %>
       <% @reply = x["topic"]  %>

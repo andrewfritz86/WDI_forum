@@ -37,8 +37,10 @@ class App < Sinatra::Base
 
 
   #####methods ########
-  ##maybe this is the issue
-  # $parsed = JSON.parse($redis.get('data'))
+
+  def parsed
+    JSON.parse($redis.get("data"))
+  end
 
   def cleanup(string)
     string = string.delete("?").delete("'").delete(",")
