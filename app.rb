@@ -64,8 +64,8 @@ class App < Sinatra::Base
 
   get('/reorder') do
     @reorder = true
-    @reorder_array = JSON.parse($redis.get("data")).sort do |item1, item2|
-     item1["vote_count"] <=> item2["vote_count"]
+    @reorder_array = parsed.sort do |topic1, topic2|
+     topic1["vote_count"] <=> topic2["vote_count"]
     end
     render(:erb, :reorder)
   end
@@ -87,7 +87,7 @@ class App < Sinatra::Base
   end
 
   get('/topics/:topic/vote') do
-    new_vote = JSON.parse($redis.get("data")).each do |x|
+    new_vote = parsed.each do |x|
       if x["topic"] == params["correct_topic"]
         x["vote_count"] += 1
       end
@@ -127,20 +127,20 @@ class App < Sinatra::Base
   post('/topics') do
     #there should be logic here to make sure that all fields are cointain
     #something, ie parameters aren't nil
-    @slug = cleanup(params["topic"])#eventually this will gsub to a SLUG
+    slug = cleanup(params["topic"])#eventually this will gsub to a SLUG
     ##title should be URL or URI
     topic = params["topic"]
     body = params["body"]
     username = params["username"]
     new_hash = {
         "topic" => topic,
-        "slug" => @slug,
+        "slug" => slug,
         "username" => username,
         "body" => body,
         "vote_count" => 0,
         "messages" => [],
           }
-    new_structure = JSON.parse($redis.get('data')).push(new_hash)
+    new_structure = parsed.push(new_hash)
     new_structure = new_structure.to_json
     $redis.set('data',new_structure)
     flash.next[:notice] = "thanks for the post!"
@@ -155,7 +155,7 @@ class App < Sinatra::Base
     username = params["username"]
     new_hash = {"message" => new_message,
                 "username" => username}
-    new_structure = JSON.parse($redis.get("data")).each do |x|
+    new_structure = parsed.each do |x|
       if x["topic"] == topic
         x["messages"].push(new_hash)
       end
@@ -171,7 +171,7 @@ class App < Sinatra::Base
   ########deletes###
     delete('/topics') do
       delete_topic = params["topic"]
-      index = JSON.parse($redis.get("data")).index { |x| x["topic"] == delete_topic}.to_i
+      index = parsed.index { |x| x["topic"] == delete_topic}.to_i
       present_structure = JSON.parse($redis.get("data"))
       present_structure.delete_at(index)
       new_structure = present_structure.to_json
