@@ -6,7 +6,11 @@ The WDI forum was developed by Andy Fritz as the first individual project for th
 
 Work will continue on the project, as there are plenty of features left to add. However, a stable, MVP version of the project was presented on September 10th, 2014.
 
+<a href="http://imgur.com/pdX1YHq"><img src="http://i.imgur.com/pdX1YHq.png" title="Hosted by imgur.com" /></a>
 
+<a href="http://imgur.com/dmrAfdM"><img src="http://i.imgur.com/dmrAfdM.png" title="Hosted by imgur.com" /></a>
+
+<a href="http://imgur.com/87Gh3sL"><img src="http://i.imgur.com/87Gh3sL.png" title="Hosted by imgur.com" /></a>
 # Technologies Used #
 
 * Ruby 2.1.2
