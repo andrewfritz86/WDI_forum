@@ -1,6 +1,6 @@
 # Overview #
 
-WDI forum is a comprhensive web application that serves as a forum for current (and potentially former) students of General Assembly's NYC WDI program. It allows students to post their thoughts or issues easily. Students can reply to issues and vote on issues based on their relevance. Students can also rank the topics by their relative number of votes, or by the time created.
+WDI forum is a comprhensive web application that serves as a forum for current (and potentially former and future) students of General Assembly's NYC WDI program. It allows students to post their thoughts or issues easily. Students can reply to issues and vote on issues based on their relevance. Students can also rank the topics by their relative number of votes, or by the time created.
 
 The WDI forum was developed by Andy Fritz as the first individual project for the August 2014 Web Development Immersive in New York City. It was developed over a 5 day sprint, with the goal of creating a useable application that demostrated an understanding of RESTful routes and and data persistence.
 
