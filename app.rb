@@ -67,7 +67,7 @@ class App < Sinatra::Base
   end
 
   get('/topics/new') do
-    render(:erb, :new_topic)
+    render(:erb, :'topics/new')
   end
 
   get('/topics/:topic') do
@@ -95,7 +95,7 @@ class App < Sinatra::Base
   get('/topics/:topic/new_message') do
     @topic = params["correct_topic"]
     @slug = params["topic"]
-    render(:erb, :new_message)
+    render(:erb, :"messages/new")
   end
 
   get('/topics/:topic/messages') do

@@ -8,12 +8,12 @@
 <%if @slug == nil%>
     <h2 class="flash"> <%= flash.now[:notice] %> </h2>
     <% parsed.reverse.each do |x| %>
-      <%= render(:erb, :_all_topics, :locals => {:x => x}) %>
+      <%= render(:erb, :"./topics/_all_topics", :locals => {:x => x}) %>
     <% end %>
 <% else %>
     <h2 class="flash"> <%= flash.now[:reply] %> </h2>
     <% parsed.each do |x| %>
-      <%= render(:erb, :_topic, :locals => {:x => x}) %>
+      <%= render(:erb, :"./topics/_topic", :locals => {:x => x}) %>
     <% end %>
     </br>
     </br>

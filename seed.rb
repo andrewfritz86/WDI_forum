@@ -1,3 +1,47 @@
+
+
+
+
+
+
+
+
+
+
+
+
+require 'redis'
+require 'json'
+
+
+redis = Redis.new
+
+
+
+
+data_array = [
+  {
+  "topic" => "here is a demo topic",
+  "username" => "default",
+  "slug" => "here-is-a-demo-topic",
+  "body" => "hey guys! here is the body of the topic",
+  "vote_count" => 0,
+  "messages" => [
+                {"message" => "hey sup", "username" => "default"},
+                {"message" => "Hi, lol", "username" => "default"},
+                {"message" => "help", "username" => "default"},
+                ],
+ }]
+
+data_array = data_array.to_json
+
+redis.set("data",data_array)
+
+
+
+
+
+
 # ###think of data as redis.set each hash individually
 
 # data = {
@@ -161,19 +205,19 @@
 
 # ###remember, this structure is a value for a key in redis called data
 # ###new structure ###
-data_array = [
-  {
-  "topic" => "here is a demo topic",
-  "username" => "default",
-  "slug" => "here-is-a-demo-topic",
-  "body" => "hey guys! here is the body of the topic",
-  "vote_count" => 0,
-  "messages" => [
-                {"message" => "hey sup", "username" => "default"},
-                {"message" => "Hi, lol", "username" => "default"},
-                {"message" => "help", "username" => "default"},
-                ],
- }],
+# data_array = [
+#   {
+#   "topic" => "here is a demo topic",
+#   "username" => "default",
+#   "slug" => "here-is-a-demo-topic",
+#   "body" => "hey guys! here is the body of the topic",
+#   "vote_count" => 0,
+#   "messages" => [
+#                 {"message" => "hey sup", "username" => "default"},
+#                 {"message" => "Hi, lol", "username" => "default"},
+#                 {"message" => "help", "username" => "default"},
+#                 ],
+#  }],
 
 #   {
 #   "topic" => "what is the meaning of life?",
