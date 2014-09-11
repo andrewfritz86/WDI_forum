@@ -35,7 +35,7 @@ data_array = [
 
 data_array = data_array.to_json
 
-redis.set("data",data_array)
+redis.set("data",data_arrayhelper)
 
 
 

@@ -1,58 +1,6 @@
-require 'sinatra/base'
-require 'pry' # if ENV["RACK_ENV"] == "development"
-require 'json'
-require 'redis'
-require 'uri'
-require 'sinatra/flash'
+require './application_controller'
 
-class App < Sinatra::Base
-
-  ########################
-  # Configuration
-  ########################
-
-  configure do
-    enable :logging
-    enable :method_override
-    enable :sessions
-    uri = URI.parse(ENV["REDISTOGO_URL"])
-    $redis = Redis.new({:host => uri.host,
-                        :port => uri.port,
-                        :password => uri.password})
-    register Sinatra::Flash
-  end
-
-
-  before do
-    logger.info "Request Headers: #{headers}"
-    logger.warn "Params: #{params}"
-  end
-
-  after do
-    logger.info "Response Headers: #{response.headers}"
-  end
-
-
-
-  #####methods ########
-
-  def parsed
-    JSON.parse($redis.get("data"))
-  end
-
-  def cleanup(string)
-    string = string.delete("?").delete("'").delete(",")
-    string.gsub!(" ","-")
-    string
-  end
-
-  ########################
-  # Routes
-  ########################
-
-  ############
-  ##get routes
-  ###########
+class App < ApplicationController
 
   get('/') do
     redirect to ('/topics')
@@ -108,12 +56,6 @@ class App < Sinatra::Base
     render(:erb, :topics)
   end
 
-
-
-
-
-
-
 ################
 ## post routes
 ################
@@ -160,10 +102,6 @@ class App < Sinatra::Base
     redirect to("/topics/#{slug}")
   end
 
-
-
-
-
 ################
 ## delete routes
 ################
@@ -177,8 +115,6 @@ class App < Sinatra::Base
       $redis.set('data',new_structure)
       redirect to('/topics')
     end
-
-
 
   end
 
