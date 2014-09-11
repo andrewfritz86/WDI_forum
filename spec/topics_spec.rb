@@ -7,17 +7,17 @@ describe("The topics page") do
     expect(page).to have_content("WDI forum")
   end
 
-  it ("displays replies") do
+  it("displays replies") do
     visit("/topics")
     expect(page).to have_content("reply count:")
   end
 
-  it ("contains a link to a new post") do
+  it("contains a link to a new post") do
     visit("/topics")
     expect page.has_content?('post a new topic')
   end
 
-  it ("contains a 'restful' banner") do
+  it("contains a 'restful' banner") do
     visit("/topics")
     expect page.has_content?('RESTful forum')
   end
@@ -41,15 +41,5 @@ describe("Making a new topic") do
     click_on "back to topics"
     expect page.has_content?("post a new topic")
   end
-
-  it("allows a user to submit a new topic ") do
-    visit("/")
-    click_on "post a new topic"
-    fill_in 'Topic?', with 'Capybara topic test'
-    fill_in 'Message?', with 'Cabybara message test'
-    fill_in 'Your Name?', with 'Your name?'
-    click_button 'Submit'
-  end
-
 
 end

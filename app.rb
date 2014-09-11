@@ -3,7 +3,7 @@ require './application_controller'
 class App < ApplicationController
 
   get('/') do
-    redirect to ('/topics')
+    redirect to('/topics')
   end
 
   get('/reorder') do
@@ -48,7 +48,7 @@ class App < ApplicationController
 
   get('/topics/:topic/messages') do
     @slug = params["topic"]
-    render(:erb, :all_messages)
+    render(:erb, :"meessages/index")
   end
 
   get('/topics/:topic') do
@@ -116,6 +116,6 @@ class App < ApplicationController
       redirect to('/topics')
     end
 
-  end
+end
 
 
