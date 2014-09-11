@@ -66,8 +66,7 @@ class App < ApplicationController
               "messages" => [{}],
               "slug" => cleanup(params[:new_topic]["topic"])
     }
-    new_topic = params[:new_topic]
-    new_topic.merge!(base_hash)
+    new_topic = params[:new_topic].merge!(base_hash)
     new_structure = parsed.push(new_topic)
     new_structure = new_structure.to_json
     binding.pry
