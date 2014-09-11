@@ -63,7 +63,7 @@ class App < Sinatra::Base
     @reorder_array = parsed.sort do |topic1, topic2|
      topic1["vote_count"] <=> topic2["vote_count"]
     end
-    render(:erb, :reorder)
+    render(:erb, :"topics/reorder")
   end
 
   get('/topics/new') do
