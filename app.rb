@@ -62,22 +62,15 @@ class App < ApplicationController
 
 
   post('/topics') do
-    #there should be logic here to make sure that all fields are cointain
-    #something, ie parameters aren't nil
-    slug = cleanup(params["topic"])
-    topic = params["topic"]
-    body = params["body"]
-    username = params["username"]
-    new_hash = {
-        "topic" => topic,
-        "slug" => slug,
-        "username" => username,
-        "body" => body,
-        "vote_count" => 0,
-        "messages" => [],
-      }
-    new_structure = parsed.push(new_hash)
+    base_hash = {"vote_count" => 0,
+              "messages" => [{}],
+              "slug" => cleanup(params[:new_topic]["topic"])
+    }
+    new_topic = params[:new_topic]
+    new_topic.merge!(base_hash)
+    new_structure = parsed.push(new_topic)
     new_structure = new_structure.to_json
+    binding.pry
     $redis.set('data',new_structure)
     flash.next[:notice] = "thanks for the post!"
     redirect to('/topics')
