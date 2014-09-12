@@ -2,14 +2,15 @@
   <form method="POST" action="/topics/<%= @slug %>/new_message">
     <input type="hidden" name="_method" value="POST" />
     <h3 class="param"> reply? </h3>
-    <input type="text" name="new_message" style="width:250px; height:150px;"/>
+    <input type="text" name="new_message[message]" style="width:250px; height:150px;"/>
     </br>
     <h3 class="param"> your name? </h3>
-    <input type="text" name="username"/>
-    <input type="hidden" name="title" value ="<%= @topic%>"/>
+    <input type="text" name="new_message[username]"/>
+    <input type="hidden" name="title" value ="<%= @reply%>"/>
+    param
     </br>
     </br>
-    <input type ="submit"  name="add" value="add reply"/>
+    <input type ="submit" value="add reply"/>
   </form>
   <a href="/topics/<%= @slug %>"> back to topic? </a>
 </section>

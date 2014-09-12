@@ -1,5 +1,4 @@
 require './application_controller'
-
 class App < ApplicationController
 
   get('/') do
@@ -18,14 +17,18 @@ class App < ApplicationController
     render(:erb, :'topics/new')
   end
 
+  get('/topics/edit/:topic') do
+    @slug = params[:topic]
+    render(:erb, :'topics/edit')
+  end
+
   get('/topics/:topic') do
-    flash.now[:reply] = "thanks for the reply!" if redirect?
+    flash.now[:reply] if redirect? #issues with this
     @slug = params["topic"]
     render(:erb, :topics)
   end
 
   get('/topics') do
-    flash.now[:notice] = "THANKS" if redirect?
     render(:erb, :topics)
   end
 
@@ -67,31 +70,22 @@ class App < ApplicationController
               "slug" => cleanup(params[:new_topic]["topic"])
     }
     new_topic = params[:new_topic].merge!(base_hash)
-    new_structure = parsed.push(new_topic)
-    new_structure = new_structure.to_json
-    binding.pry
+    new_structure = parsed.push(new_topic).to_json
     $redis.set('data',new_structure)
-    flash.next[:notice] = "thanks for the post!"
+    flash.next[:notice] = "thanks for the post!" #need to fix
     redirect to('/topics')
   end
 
 
   post('/topics/:topic/new_message') do
-    new_message = params["new_message"]
-    topic = params["title"]
-    slug = params["topic"]
-    username = params["username"]
-    new_hash = {"message" => new_message,
-                "username" => username}
     new_structure = parsed.each do |x|
-      if x["topic"] == topic
-        x["messages"].push(new_hash)
+      if x["slug"] == params["topic"]
+        x["messages"].push(params[:new_message])
       end
     end
-    new_structure = new_structure.to_json
-    $redis.set('data',new_structure)
+    $redis.set('data',new_structure.to_json)
     flash.next[:reply] = "thanks for the reply!"
-    redirect to("/topics/#{slug}")
+    redirect to("/topics/#{params[:topic]}")
   end
 
 ################
@@ -105,6 +99,22 @@ class App < ApplicationController
       present_structure.delete_at(index)
       new_structure = present_structure.to_json
       $redis.set('data',new_structure)
+      redirect to('/topics')
+    end
+
+
+################
+## put routes
+################
+
+    put('/topics') do
+     new_structure = parsed.each do |x|
+      binding.pry
+        if x["slug"] == params[:slug]
+          x["body"] = params[:new_body]
+        end
+      end
+      $redis.set("data",new_structure.to_json)
       redirect to('/topics')
     end
 

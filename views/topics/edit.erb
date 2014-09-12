@@ -1,0 +1,18 @@
+</br>
+<section class="new_topic">
+  <h4> edit topic </h4>
+  <form method="POST" action="/topics">
+    <input type="hidden" name="_method" value="PUT" />
+    <h3 class="param">edit</h3>
+    <input type="text" name="new_body" style="width:250px; height:150px;"/>
+    </br>
+    </br>
+    <input type="hidden" name="slug" value="<%=@slug %>">
+    </br>
+    </br>
+    <input type="submit">
+    </br>
+    </br>
+    <a href ="/topics"> back to topics </a>
+  </form>
+</section>
